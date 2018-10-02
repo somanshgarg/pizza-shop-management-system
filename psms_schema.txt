@@ -1,0 +1,102 @@
+create table EMPLOYEES(
+EMPID int PRIMARY KEY,
+NAME varchar2(30) NOT NULL,
+MOBILE number(10,0) CHECK (MOBILE>=1000000000 AND MOBILE<=9999999999),
+ADDRESSS varchar2(100),
+GENDER varchar2(6) CHECK (GENDER IN('MALE','FEMALE','OTHER')),
+DOB date,
+DOJ date NOT NULL,
+DOIN date,
+STATUS varchar2(8) CHECK (STATUS IN('ACTIVE','INACTIVE'))  NOT NULL,
+PASSWORD varchar2(30) NOT NULL,
+SALARY number,
+DESIGNATION varchar2(7) CHECK (DESIGNATION IN('CASHIER','MANAGER','ADMIN')) NOT NULL
+);
+
+insert into employees values(1,'Somansh Garg',1234567897,'Dehradun','MALE','31/October/1998','3/July/2018',NULL,'ACTIVE','somansh',2500000,'ADMIN');
+
+create table CUSTOMERS(
+NAME varchar2(30),
+MOBILE  number(10,0) CHECK (MOBILE>=1000000000 AND MOBILE<=9999999999) PRIMARY KEY,
+GENDER varchar2(6) CHECK (GENDER IN('MALE','FEMALE','OTHER')),
+DOF timestamp DEFAULT SYSTIMESTAMP
+);
+ Alter table customers ADD POINTS int DEFAULT 0;
+alter table employees ADD LOCKS varchar2(8) default 'UNLOCKED' CHECK(LOCKS IN('LOCKED','UNLOCKED')) ;
+
+create table MENU(
+PRID int PRIMARY KEY,
+NAME varchar2(30) NOT NULL,
+PRICE_S int,
+PRICE_M int,
+PRICE_L int,
+SHORTCUT varchar2(10) UNIQUE,
+TYPE varchar2(7) CHECK (TYPE IN('VEG','NON-VEG')),
+DETAILS clob
+);
+
+create table ORDERS(
+ORDID int PRIMARY KEY,
+CUSTID number NOT NULL,
+EMPID int NOT NULL,
+TIME timestamp DEFAULT SYSTIMESTAMP,
+BILL int,
+DETAILS clob,
+foreign key(CUSTID) references CUSTOMERS(MOBILE),
+foreign key(EMPID) references EMPLOYEES(EMPID)
+);
+ALTER table ORDERS MODIFY DETAILS  DEFAULT 'NO DETAILS AVAILABLE OF THE BILL';
+
+insert into employees values(2,'Daisy',1234567898,'Mexico','FEMALE','10/May/1997','24/June/2018',NULL,'ACTIVE','daisy',25000,'CASHIER','UNLOCKED');
+insert into employees values(3,'Alex',1234567899,'Colorado','MALE','27/August/1990','25/June/2018','28/June/2018','INACTIVE','alex',35000,'CASHIER','UNLOCKED');
+insert into employees values(4,'Walter',1234567890,'Canada','MALE','11/January/1988','26/June/2018',NULL,'ACTIVE','walter',120000,'MANAGER','UNLOCKED');
+insert into employees values(5,'Gustavo',1234567891,'London','MALE','21/December/1995','27/June/2018',NULL,'ACTIVE','gustavo',14000,'CASHIER','UNLOCKED');
+insert into employees values(6,'Mike',1234567892,'New York','MALE','15/April/1976','28/June/2018',NULL,'ACTIVE','mike',20000,'CASHIER','UNLOCKED');
+insert into employees values(7,'Jesse',1234567893,'Atlanta','MALE','5/May/1976','29/June/2018',NULL,'ACTIVE','jesse',5000,'CASHIER','UNLOCKED');
+insert into employees values(8,'Skyler',1234567894,'Spain','FEMALE','10/November/1999','30/June/2018',NULL,'ACTIVE','skyler',1000,'CASHIER','UNLOCKED');
+
+insert into MENU(prid,name,price_s,price_m,price_l,shortcut,type,details) values(1,'MARGHERITA',75,170,315,'mrg','VEG','A hugely popular margherita, with a deliciously tangy single cheese topping');
+insert into MENU(prid,name,price_s,price_m,price_l,shortcut,type,details) values(2,'FARM HOUSE',120,255,410,'frh','VEG','A pizza that goes ballistic on veggies! Check out this mouth watering overload of crunchy, crisp capsicum, succulent mushrooms and fresh tomatoes');
+insert into MENU(prid,name,price_s,price_m,price_l,shortcut,type,details) values(3,'DELUXE VEGGIE',170,315,475,'dxv','VEG','For a vegetarian looking for a BIG treat that goes easy on the spices, this ones got it all.. The onions, the capsicum, those delectable mushrooms - with paneer and golden corn to top it all');
+insert into MENU(prid,name,price_s,price_m,price_l,shortcut,type,details) values(4,'5 PEPPER',170,315,475,'5pp','VEG','An exotic new Pizza. Topped wih red bell pepper, yellow bell pepper, capsicum, red paprika, jalapeno and sprinked with exotic herb');
+insert into MENU(prid,name,price_s,price_m,price_l,shortcut,type,details) values(5,'MEXICAN GREEN WAVE',170,315,475,'mgv','VEG','A pizza loaded with crunchy onions, crisp capsicum, juicy tomatoes and jalapeno with a liberal sprinkling of exotic Mexican herbs');
+insert into MENU(prid,name,price_s,price_m,price_l,shortcut,type,details) values(6,'PEPPER BARBECUE CHICKEN',120,255,410,'pbc','NON-VEG','Pepper Barbecue Chicken I Cheese');
+insert into MENU(prid,name,price_s,price_m,price_l,shortcut,type,details) values(7,'NON VEG SUPREME',170,315,475,'nvs','NON-VEG','Bite into supreme delight of Black Olives, Onions, Grilled Mushrooms, Pepper BBQ Chicken, Peri-Peri Chicken, Grilled Chicken Rashers');
+insert into MENU(prid,name,price_s,price_m,price_l,shortcut,type,details) values(8,'PERI PERI CHICKEN',205,360,510,'ppc','NON-VEG','Peri-Peri Chicken with Red Paprika');
+insert into MENU(prid,name,price_s,price_m,price_l,shortcut,type,details) values(9,'CHICKEN FIESTA',240,410,575,'cfie','NON-VEG','Grilled Chicken Rashers with Peri-Peri Chicken I Onion I Capsicum');
+insert into MENU(prid,name,price_s,price_m,price_l,shortcut,type,details) values(10,'CHICKEN DOMINATOR',206,360,510,'cdom','NON-VEG','Treat your taste buds with Double Pepper Barbecue Chicken, Peri-Peri Chicken, Chicken Tikka and Grilled Chicken Rashers');
+
+alter table employees RENAME COLUMN ADDRESSS TO ADDRESS;
+
+
+insert into CUSTOMERS(name,mobile,gender) values('Vaibhav',7894561230,'MALE');
+insert into CUSTOMERS(name,mobile,gender) values('Rohit',7894561231,'MALE');
+insert into CUSTOMERS(name,mobile,gender) values('Vedant',7894561232,'MALE');
+insert into CUSTOMERS(name,mobile,gender) values('Mayank',7894561233,'MALE');
+insert into CUSTOMERS(name,mobile,gender) values('Prachi',7894561234,'FEMALE');
+insert into CUSTOMERS(name,mobile,gender) values('Kritika',7894561235,'FEMALE');
+
+insert into ORDERS(ordid,custid,empid,bill) values(1,7894561231,5,100);
+insert into ORDERS(ordid,custid,empid,bill) values(2,7894561230,5,101);
+insert into ORDERS(ordid,custid,empid,bill) values(3,7894561231,3,200);
+insert into ORDERS(ordid,custid,empid,bill) values(4,7894561232,5,300);
+insert into ORDERS(ordid,custid,empid,bill) values(5,7894561231,6,340);
+insert into ORDERS(ordid,custid,empid,bill) values(6,7894561233,7,450);
+insert into ORDERS(ordid,custid,empid,bill) values(7,7894561233,7,344);
+insert into ORDERS(ordid,custid,empid,bill) values(8,7894561231,7,197);
+insert into ORDERS(ordid,custid,empid,bill) values(9,7894561234,2,654);
+insert into ORDERS(ordid,custid,empid,bill) values(10,7894561235,2,327);
+insert into ORDERS(ordid,custid,empid,bill) values(11,7894561235,8,442);
+insert into ORDERS(ordid,custid,empid,bill) values(12,7894561230,7,334);
+
+update orders set time = '5-July-18' where ordid = 4;
+update orders set time = '5-July-18' where ordid = 5;
+update orders set time = '5-July-18' where ordid = 6;
+update orders set time = '6-July-18' where ordid = 7;
+update orders set time = '6-July-18' where ordid = 8;
+update orders set time = '7-July-18' where ordid = 9;
+update orders set time = '8-July-18' where ordid = 10;
+update orders set time = '10-July-18' where ordid = 11;
+update orders set time = '10-July-18' where ordid = 12;
+
+update customers set points = 123 where mobile = 7894561232;

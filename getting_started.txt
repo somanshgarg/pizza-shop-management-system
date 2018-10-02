@@ -1,0 +1,35 @@
+Hey Guys,
+
+Here are some prerequisite which needs to be done before the code can run.
+
+1)DATABASE
+
+>The DBMS we have used is Oracle11g , so please install this software.
+>Create a new database with name "PDS".
+>Set it's password to "somansh".
+>Make sure it run on the port number "127.0.0.1".
+>Copy the contents of the file "psms_schema" and paste it to build the schema.
+>"commit" and save the database.
+
+2)IDE
+
+>Install Eclipse jupiter with PyDev installed in it.
+>Download the "cx_Oracle" extension/package from the internet inorder to ensure smooth running of the code.
+
+3)CODE FILES
+
+>Open the "Code_Files" folder.
+>Run the "logins.py" file.
+
+
+We are ready to go...
+
+Some default employees -
+
+> Employee id - 1 	Password - somansh	Designation- Admin
+> Employee id - 2	Password - daisy	Designation - Cashier
+> Employee id - 4	password - walter	Designation - Manager
+
+Some default customer -
+
+> Customer Mobile - 7894561232		Name - Vedant		Points - 123
